@@ -27,6 +27,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import jakarta.mail.MessagingException;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/clientes")
@@ -73,7 +74,7 @@ public class ClienteController {
 	@SecurityRequirement(name="Bearer Auth")
 	@PreAuthorize("hasRole('ADMIN')")
 	@Operation( summary  = "Cadastrar novo Cliente - ADMIN", description = "Cadastro de clientes")
-	public Cliente cadastrarCliente(@RequestParam String email, @RequestBody ClienteDTO clienteDTO) throws MessagingException {
+	public Cliente cadastrarCliente(@Valid @RequestParam String email,@Valid @RequestBody ClienteDTO clienteDTO) throws MessagingException {
 		emailService.envioEmailCadastroC(email, clienteDTO);
 		return clienteService.cadastrarCliente(clienteDTO);
 	}

@@ -1,7 +1,10 @@
 package br.com.api.g3.domain;
 
+import br.com.api.g3.enums.CategoriaEnum;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.EnumType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -19,8 +22,8 @@ public class Categoria {
 	@Column(name="cat_tx_nome")
 	private String nome;
 	
-	@Column(name="cat_tx_desc")
-	private String descricao;
+	@Column(name="cat_tx_STRING")
+	private CategoriaEnum descricao;
 
 	@ManyToOne
 	@JoinColumn(name="fk_prod_cd_id")
@@ -31,7 +34,7 @@ public class Categoria {
 		
 	}
 
-	public Categoria(Long categoriaId, String nome, String descricao) {
+	public Categoria(Long categoriaId, String nome, CategoriaEnum descricao) {
 		super();
 		this.categoriaId = categoriaId;
 		this.nome = nome;
@@ -54,12 +57,17 @@ public class Categoria {
 		this.nome = nome;
 	}
 
-	public String getDescricao() {
+	public CategoriaEnum getDescricao() {
 		return descricao;
 	}
 
-	public void setDescricao(String descricao) {
+	public void setDescricao(CategoriaEnum descricao) {
 		this.descricao = descricao;
+	}
+
+	public Object atualizarCategoria(Categoria categoria, Long id) {
+	
+		return null;
 	}
 	
 	

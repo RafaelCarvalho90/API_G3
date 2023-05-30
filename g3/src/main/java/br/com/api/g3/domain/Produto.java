@@ -86,6 +86,13 @@ public class Produto {
 		this.valor = valor;
 		
 	}
+
+	public void setUrl(String string) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
     
 
 
