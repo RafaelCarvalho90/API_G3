@@ -45,5 +45,25 @@ public class Pedido {
 		this.pedidoId = pedidoId;
 	}
 
+	public Object getProdutos() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Object getCliente() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void setProdutos(Object produtos2) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setCliente(Object cliente2) {
+		// TODO Auto-generated method stub
+		
+	}
+
     
 }

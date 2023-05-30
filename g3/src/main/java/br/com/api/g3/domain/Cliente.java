@@ -16,6 +16,9 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "clienteId", scope = Cliente.class)
 @Entity
@@ -26,7 +29,10 @@ public class Cliente {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "cli_cd_id")
 	private Long clienteId;
-
+	
+	@NotBlank(message = "o Campo não pode estar vazio")
+	@NotNull 
+	@Size(min = 5, max = 20) //O tamanho deve  ser entre 5 e 20
 	@Column(name = "cli_tx_nome")
 	private String nome;
 
