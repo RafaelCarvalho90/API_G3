@@ -11,6 +11,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
@@ -57,9 +58,9 @@ public class Produto {
     @OneToOne(mappedBy= "produto")
     private Foto foto;
 
-	@ManyToOne
-	@JoinColumn(name="fk_ped_cd_id")
-	private Pedido pedidoRel;
+//	@ManyToOne
+//	@JoinColumn(name="fk_ped_cd_id")
+//	private Pedido pedidoRel;
 
 	@ManyToOne
 	@JoinColumn(name="fk_fun_cd_id")
@@ -67,6 +68,9 @@ public class Produto {
 
 	@OneToMany(mappedBy="produtoRel")
 	private List<Categoria> categoria;
+
+	@ManyToMany(mappedBy="produtos")
+	private List<Pedido> pedidos;
 
 	public Long getProdutoId() {
 		return produtoId;
@@ -112,15 +116,6 @@ public class Produto {
 	public void setTipo(CategoriaEnum tipo) {
 		this.tipo = tipo;
 	}
-
-	
-	
-
-	
-		
-
-
-    
 
 
 }

@@ -6,9 +6,13 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.api.g3.domain.Cliente;
 import br.com.api.g3.domain.Pedido;
+import br.com.api.g3.domain.Produto;
 import br.com.api.g3.dto.PedidoDTO;
+import br.com.api.g3.repositories.ClienteRepository;
 import br.com.api.g3.repositories.PedidoRepository;
+import br.com.api.g3.repositories.ProdutoRepository;
 
 @Service
 public class PedidoService {
@@ -20,6 +24,12 @@ public class PedidoService {
     
     @Autowired
     ProdutoService produtoService;
+
+    @Autowired
+    ProdutoRepository produtoRepository;
+    
+    @Autowired
+    ClienteRepository clienteRepository;
     
 	public List<Pedido> findAll(){
         return pedidoRepository.findAll();
@@ -32,16 +42,12 @@ public class PedidoService {
     }
 
     public Pedido cadastrarPedido(PedidoDTO pedidoDTO) {
-    		
     		Pedido pedido = new Pedido();
-    		
-    		
-    		pedido.setCliente(clienteService.findById(pedidoDTO.getClienteId()).get());
+    		Optional<Cliente> cliente = clienteRepository.findById(pedidoDTO.getClienteId());
+    		List<Produto> produtos = produtoRepository.findAllById(pedidoDTO.getProdutoId());
+    		pedido.setProdutos(produtos);
+    		pedido.setCliente(cliente.get());
     	
-    		for(Long produto : pedidoDTO.getProdutoId()) {
-    		
-    			pedido.getProdutos().add(produtoService.findById(produto).get());
-    		}
     		
            return pedidoRepository.save(pedido);
         }	
