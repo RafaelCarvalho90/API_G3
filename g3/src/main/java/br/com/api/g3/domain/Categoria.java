@@ -24,7 +24,7 @@ public class Categoria {
 	
 	@Enumerated(EnumType.STRING)
 	@Column(name="cat_tx_string")
-	private CategoriaEnum descricao;
+	private CategoriaEnum tipo;
 
 	@ManyToOne
 	@JoinColumn(name="fk_prod_cd_id")
@@ -35,11 +35,11 @@ public class Categoria {
 		
 	}
 
-	public Categoria(Long categoriaId, String nome, CategoriaEnum descricao) {
+	public Categoria(Long categoriaId, String nome, CategoriaEnum tipo) {
 		super();
 		this.categoriaId = categoriaId;
 		this.nome = nome;
-		this.descricao = descricao;
+		this.tipo = tipo;
 	}
 
 	public Long getCategoriaId() {
@@ -58,14 +58,15 @@ public class Categoria {
 		this.nome = nome;
 	}
 
-	public CategoriaEnum getDescricao() {
-		return descricao;
+	public CategoriaEnum getTipo() {
+		return tipo;
 	}
 
-	public void setDescricao(CategoriaEnum descricao) {
-		this.descricao = descricao;
+	public void setTipo(CategoriaEnum tipo) {
+		this.tipo = tipo;
 	}
 
+	
 //	public Object atualizarCategoria(Categoria categoria, Long id) {
 //	
 //		return null;

@@ -79,6 +79,7 @@ public class ClienteController {
 		return clienteService.cadastrarCliente(clienteDTO);
 	}
 	
+	
 	@PutMapping("/{id}")
 	@SecurityRequirement(name="Bearer Auth")
 	@PreAuthorize("hasRole('ADMIN')")
