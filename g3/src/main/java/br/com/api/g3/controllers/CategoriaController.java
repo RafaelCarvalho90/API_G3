@@ -38,12 +38,14 @@ public class CategoriaController {
 
 	@GetMapping("/listar")
 	@SecurityRequirement(name="Bearer Auth")
-	@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasRole('USER')")
+	@Operation( summary  = "Listar todas as Categoria - USER", description = "Listar categoria")
 	public List<Categoria> listar() {
 		return categoriaService.findAll();
 	}
 
 	@GetMapping("/{id}")
+	@Operation( summary  = "Procurar uma nova Categoria por Id - ADMIN", description = "Procurar categoria")
 	public ResponseEntity<Categoria> procurarId(@PathVariable Long id){
 		Optional <Categoria> opt = categoriaService.findById(id);
 		if(opt.isPresent()) {
@@ -55,10 +57,12 @@ public class CategoriaController {
 	@PostMapping
 	@SecurityRequirement(name="Bearer Auth")
 	@PreAuthorize("hasRole('ADMIN')")
+	@Operation( summary  = "Cadastrar uma nova Categoria - ADMIN", description = "Cadastro de categoria")
 	public Categoria cadastrarCategoria(@RequestBody Categoria categoria) throws MessagingException {
 		return categoriaService.cadastrarCategoria(categoria);
 	}
 	@PutMapping("/{id}")
+	@Operation( summary  = "Atualizar uma Categoria - ADMIN", description = "Atualizar categoria")
 	public Categoria atualizar(@PathVariable Long id, @RequestBody Categoria categoria) {
 		return categoriaService.atualizarCategoria(categoria, id);
 	}

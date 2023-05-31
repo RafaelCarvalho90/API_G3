@@ -44,7 +44,7 @@ public class PedidoService {
     		}
     		
            return pedidoRepository.save(pedido);
-        }
+        }	
 
 
     public Pedido atualizarPedido(Pedido pedidoAtualizado, Long id) {

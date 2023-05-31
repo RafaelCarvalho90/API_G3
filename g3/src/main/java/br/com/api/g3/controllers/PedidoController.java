@@ -42,8 +42,8 @@ public class PedidoController {
 
     @GetMapping("/listar")
 	@SecurityRequirement(name="Bearer Auth")
-	@PreAuthorize("hasRole('ADMIN')")
-	@Operation( summary  = "Lista todos os Pedidos - ADMIN", description = "Listagem de pedidos")
+	@PreAuthorize("hasRole('USER')")
+	@Operation( summary  = "Lista todos os Pedidos - USER", description = "Listagem de pedidos")
 	@ApiResponses( value = {
 			@ApiResponse(responseCode= "200", description="Retorna todos os pedidos"),
 			@ApiResponse(responseCode= "401", description="Erro de autenticacao")
@@ -54,8 +54,8 @@ public class PedidoController {
 
 	@GetMapping("/{id}")
 	@SecurityRequirement(name="Bearer Auth")
-	@PreAuthorize("hasRole('ADMIN')")
-	@Operation( summary  = "Lista de pedidos por Id - ADMIN", description = "Lista pedidos Id")
+	@PreAuthorize("hasRole('USER')")
+	@Operation( summary  = "Lista de pedidos por Id - USER", description = "Lista pedidos Id")
 	public ResponseEntity<Pedido> procurarId(@PathVariable Long id){
 		Optional <Pedido> opt = pedidoService.findById(id);
 		if(opt.isPresent()) {
@@ -68,8 +68,8 @@ public class PedidoController {
 	
 	@PostMapping
 	@SecurityRequirement(name="Bearer Auth")
-	@PreAuthorize("hasRole('ADMIN')")
-	@Operation( summary  = "Cadastrar novo Pedido - ADMIN", description = "Cadastro de pedidos")
+	@PreAuthorize("hasRole('USER')")
+	@Operation( summary  = "Cadastrar novo Pedido - USER", description = "Cadastro de pedidos")
 	public Object cadastrarPedido(@RequestParam String email, @RequestBody PedidoDTO pedidoDTO) throws MessagingException {
 		return pedidoService.cadastrarPedido(pedidoDTO);
 	}
@@ -77,16 +77,16 @@ public class PedidoController {
 
 	@PutMapping("/{id}")
 	@SecurityRequirement(name="Bearer Auth")
-	@PreAuthorize("hasRole('ADMIN')")
-	@Operation( summary  = "Atualizar  Pedido - ADMIN", description = "Atualização de pedidos")
+	@PreAuthorize("hasRole('USER')")
+	@Operation( summary  = "Atualizar  Pedido - USER", description = "Atualização de pedidos")
 	public ResponseEntity<Object> atualizarPedido(@RequestBody Pedido pedido, @PathVariable Long id) {
 		return ResponseEntity.status(HttpStatus.OK).body(pedidoService.atualizarPedido(pedido, id));
 	}
 
 	@DeleteMapping("/{id}")
 	@SecurityRequirement(name="Bearer Auth")
-	@PreAuthorize("hasRole('ADMIN')")
-	@Operation( summary  = "Deletar Pedido - ADMIN", description = "Delete de pedidos")
+	@PreAuthorize("hasRole('USER')")
+	@Operation( summary  = "Deletar Pedido - USER", description = "Delete de pedidos")
 	public ResponseEntity<?> delete(@PathVariable Long id) {
 		pedidoService.deleteById(id);
 		return ResponseEntity.status(HttpStatus.OK).build();

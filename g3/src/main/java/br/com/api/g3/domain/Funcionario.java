@@ -22,9 +22,16 @@ public class Funcionario {
     @Column(name="func_cd_id",nullable=false, unique=true)
     private Long funcionarioId;
 
+	//@NotBlank(message = "O campo não pode estar vazio")
+	//@NotNull 
+	//@Size(min = 5, max = 20, message = "o tamanho deve ser 5 e 20") //O tamanho deve  ser entre 5 e 20
     @Column(name="func_tx_nome")
     private String nome;
     
+	//@NotBlank(message="O campo não pode estar vazio")
+	//@NotNull
+	//@Email
+	//@Pattern(regexp=".+@.+\\.com+", message="Por favor, insira um e-mail válido.")
     @Column(name="func_tx_email")
     private String email;
     

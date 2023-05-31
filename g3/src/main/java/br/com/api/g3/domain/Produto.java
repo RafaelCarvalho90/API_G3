@@ -25,12 +25,19 @@ public class Produto {
     @Column(name="prod_cd_id",nullable=false, unique=true)
     private Long produtoId;
 
+	//@NotBlank(message= "O campo não pode estar vazio")
+	//@NotNull
+	//@Size(min=5, max=20, message="O nome deve ter entre 5 e 20 caracteres")
     @Column(name="prod_tx_nome")
     private String nome;
 
+	//@NotBlank(message="O campo não pode estar vazio")
+	//@NotNull
     @Column(name="prod_tx_descricao")
     private String descricao;
 
+	//@NotBlank(message="O campo não pode estar vazio")
+	//@NotNull
     @Column(name="prod_nm_valor")
     private Double valor;
     
