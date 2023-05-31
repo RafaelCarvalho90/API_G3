@@ -16,16 +16,25 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.api.g3.domain.Pedido;
+import br.com.api.g3.dto.PedidoDTO;
 import br.com.api.g3.services.PedidoService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import jakarta.mail.MessagingException;
 
 @RestController
 @RequestMapping("/pedidos")
+@SecurityScheme(
+        name = "Bearer Auth",
+        type = SecuritySchemeType.HTTP,
+        bearerFormat = "JWT",
+        scheme = "bearer"
+    )
 public class PedidoController {
 	
 	@Autowired
@@ -61,8 +70,8 @@ public class PedidoController {
 	@SecurityRequirement(name="Bearer Auth")
 	@PreAuthorize("hasRole('ADMIN')")
 	@Operation( summary  = "Cadastrar novo Pedido - ADMIN", description = "Cadastro de pedidos")
-	public Object cadastrarPedido(@RequestParam String email, @RequestBody Pedido pedido) throws MessagingException {
-		return pedidoService.cadastrarPedido(pedido);
+	public Object cadastrarPedido(@RequestParam String email, @RequestBody PedidoDTO pedidoDTO) throws MessagingException {
+		return pedidoService.cadastrarPedido(pedidoDTO);
 	}
 	
 

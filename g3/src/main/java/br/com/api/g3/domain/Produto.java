@@ -10,6 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -30,17 +31,19 @@ public class Produto {
     @Column(name="prod_nm_valor")
     private Double valor;
     
-    private String url;
+    
 
  
-    public Produto(Long produtoId, String nome, String descricao, Double valor, String url) {
+    public Produto(Long produtoId, String nome, String descricao, Double valor) {
 		super();
 		this.produtoId = produtoId;
 		this.nome = nome;
 		this.descricao = descricao;
 		this.valor = valor;
-		this.url = url;
+		
 	}
+    @OneToOne(mappedBy= "produto")
+    private Foto foto;
 
 	@ManyToOne
 	@JoinColumn(name="fk_ped_cd_id")
@@ -98,14 +101,7 @@ public class Produto {
 //		
 //	}
 
-	public String getUrl() {
-		return url;
-	}
-
-	public void setUrl(String string) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 
     

@@ -4,7 +4,7 @@ import br.com.api.g3.enums.CategoriaEnum;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
-import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -22,7 +22,8 @@ public class Categoria {
 	@Column(name="cat_tx_nome")
 	private String nome;
 	
-	@Column(name="cat_tx_STRING")
+	@Enumerated(EnumType.STRING)
+	@Column(name="cat_tx_string")
 	private CategoriaEnum descricao;
 
 	@ManyToOne
@@ -65,10 +66,10 @@ public class Categoria {
 		this.descricao = descricao;
 	}
 
-	public Object atualizarCategoria(Categoria categoria, Long id) {
-	
-		return null;
-	}
+//	public Object atualizarCategoria(Categoria categoria, Long id) {
+//	
+//		return null;
+//	}
 	
 	
 	

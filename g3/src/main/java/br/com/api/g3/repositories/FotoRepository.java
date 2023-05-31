@@ -12,4 +12,6 @@ public interface FotoRepository extends JpaRepository<Foto, Long> {
 
 	Optional<Foto> findByProduto(Produto produto);
 
+	
+
 }

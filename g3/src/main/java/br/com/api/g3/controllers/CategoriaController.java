@@ -1,5 +1,6 @@
 package br.com.api.g3.controllers;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,26 +13,32 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.api.g3.domain.Categoria;
 import br.com.api.g3.services.CategoriaService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
-import jakarta.mail.MessagingException;
+import io.swagger.v3.oas.annotations.security.SecurityScheme;
 
 @RestController
 @RequestMapping("/categorias")
+@SecurityScheme(
+        name = "Bearer Auth",
+        type = SecuritySchemeType.HTTP,
+        bearerFormat = "JWT",
+        scheme = "bearer"
+    )
 public class CategoriaController {
 
-@Autowired
-CategoriaService categoriaService;
+	@Autowired
+	CategoriaService categoriaService;
 
-@GetMapping("/listar")
+	@GetMapping("/listar")
 	@SecurityRequirement(name="Bearer Auth")
 	@PreAuthorize("hasRole('ADMIN')")
 	@Operation( summary  = "Lista todos as Categorias - ADMIN", description = "Listagem de categorias")
@@ -39,7 +46,7 @@ CategoriaService categoriaService;
 			@ApiResponse(responseCode= "200", description="Retorna todos os clientes"),
 			@ApiResponse(responseCode= "401", description="Erro de autenticacao")
 	})
-	public Object listar() {
+	public List<Categoria> listar() {
 		return categoriaService.findAll();
 	}
 
@@ -60,8 +67,8 @@ CategoriaService categoriaService;
 	@PostMapping
 	@SecurityRequirement(name="Bearer Auth")
 	@PreAuthorize("hasRole('ADMIN')")
-	@Operation( summary  = "Cadastrar nova categoria - ADMIN", description = "Cadastro de categorias")
-	public Object cadastrarCategoria(@RequestParam String email, @RequestBody Categoria categoria) throws MessagingException {
+	@Operation( summary  = "Cadastrar nova Categoria - ADMIN", description = "Cadastro de categorias")
+	public Categoria cadastrarCategoria(@RequestBody Categoria categoria)  {
 		return categoriaService.cadastrarCategoria(categoria);
 	}
 	
@@ -70,8 +77,8 @@ CategoriaService categoriaService;
 	@SecurityRequirement(name="Bearer Auth")
 	@PreAuthorize("hasRole('ADMIN')")
 	@Operation( summary  = "Atualizar  Categoria - ADMIN", description = "Atualização de categorias")
-	public ResponseEntity<Object> atualizarCategoria(@RequestBody Categoria categoria, @PathVariable Long id) {
-		return ResponseEntity.status(HttpStatus.OK).body(categoria.atualizarCategoria(categoria, id));
+	public Categoria atualizarCategoria(@RequestBody Categoria categoria, @PathVariable Long id) {
+		return categoriaService.atualizarCategoria(categoria, id);
 	}
 
 	@DeleteMapping("/{id}")
