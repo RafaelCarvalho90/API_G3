@@ -6,6 +6,7 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+import br.com.api.g3.security.domain.User;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -15,6 +16,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -32,7 +34,7 @@ public class Cliente {
 	
 	@NotBlank(message = "o Campo não pode estar vazio")
 	@NotNull 
-	@Size(min = 5, max = 20) //O tamanho deve  ser entre 5 e 20
+	@Size(min = 5, max = 20, message = "o tamanho deve ser 5 e 20") //O tamanho deve  ser entre 5 e 20
 	@Column(name = "cli_tx_nome")
 	private String nome;
 
@@ -48,6 +50,11 @@ public class Cliente {
 	@ManyToMany(cascade = CascadeType.PERSIST)
 	@JoinTable(name = "cliente_endereco", joinColumns = @JoinColumn(name = "fk_cli_cd_id"), inverseJoinColumns = @JoinColumn(name = "fk_end_cd_id"))
 	private List<Endereco> endereco;
+
+	@OneToOne
+	@JoinColumn(name="fk_id")
+	private User user;
+	 
 
 	public Cliente() {
 		this.endereco = new ArrayList<Endereco>();

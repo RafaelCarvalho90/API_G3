@@ -61,7 +61,7 @@ public class ClienteController {
 	@SecurityRequirement(name="Bearer Auth")
 	@PreAuthorize("hasRole('ADMIN')")
 	@Operation( summary  = "Lista de Clientes por Id - ADMIN", description = "Lista por Id")
-	public ResponseEntity<Cliente> procurarId(@PathVariable Long id){
+	public ResponseEntity<Cliente> findById(@PathVariable Long id){
 		Optional <Cliente> opt = clienteService.findById(id);
 		if(opt.isPresent()) {
 			return ResponseEntity.ok(opt.get());

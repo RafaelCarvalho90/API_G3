@@ -7,13 +7,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.api.g3.domain.Pedido;
+import br.com.api.g3.dto.PedidoDTO;
 import br.com.api.g3.repositories.PedidoRepository;
 
 @Service
 public class PedidoService {
     @Autowired
 	PedidoRepository pedidoRepository;
-
+    
+    @Autowired
+    ClienteService clienteService;
+    
+    @Autowired
+    ProdutoService produtoService;
+    
 	public List<Pedido> findAll(){
         return pedidoRepository.findAll();
     }
@@ -24,8 +31,18 @@ public class PedidoService {
 
     }
 
-    public Pedido cadastrarPedido(Pedido pedido) {
-
+    public Pedido cadastrarPedido(PedidoDTO pedidoDTO) {
+    		
+    		Pedido pedido = new Pedido();
+    		
+    		
+    		pedido.setCliente(clienteService.findById(pedidoDTO.getClienteId()).get());
+    	
+    		for(Long produto : pedidoDTO.getProdutoId()) {
+    		
+    			pedido.getProdutos().add(produtoService.findById(produto).get());
+    		}
+    		
            return pedidoRepository.save(pedido);
         }
 
@@ -35,7 +52,7 @@ public class PedidoService {
         if(opt.isPresent()) {
             Pedido pedidoAntigo = opt.get();
             pedidoAntigo.setProdutos(pedidoAtualizado.getProdutos());
-            pedidoAntigo.setCliente(pedidoAtualizado.getCliente());
+            //pedidoAntigo.setCliente(pedidoAtualizado.getCliente());
             pedidoRepository.save(pedidoAntigo);
         }
         return null;
@@ -44,6 +61,7 @@ public class PedidoService {
     public void deleteById(Long id) {
     	pedidoRepository.deleteById(id);
 
-        }
+       }
+
     }
 

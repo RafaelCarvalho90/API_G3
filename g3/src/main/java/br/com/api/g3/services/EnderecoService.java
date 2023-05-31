@@ -3,6 +3,7 @@ package br.com.api.g3.services;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,12 +18,12 @@ public class EnderecoService {
 	@Autowired
 	EnderecoRepository enderecoRepository;
 
-	public List<Endereco> listaEndereco() {
+	public List<Endereco> findAll() {
 		return enderecoRepository.findAll();
 	}
 
-	public Endereco buscaEndereco(Long id) {
-		return enderecoRepository.findById(id).get();
+	public Optional<Endereco> findById(Long id) {
+		return enderecoRepository.findById(id);
 	}
 
 	public Endereco adicionaEndereco(Endereco endereco) {
@@ -59,5 +60,12 @@ public class EnderecoService {
 		endereco.setUf(endCadastro.getUf()); 
 		return endereco;	
 	}
+		public void deletaEndereco (Long id) {
+    	enderecoRepository.deleteById(id);
+
+        }
+
+		
+
 
 }

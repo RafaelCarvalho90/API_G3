@@ -15,7 +15,7 @@ public class CategoriaService {
 @Autowired
 CategoriaRepository categoriaRepository;
 
-public List<Categoria> findAll(){
+	public List<Categoria> findAll(){
         return categoriaRepository.findAll();
     }
 
@@ -26,8 +26,10 @@ public List<Categoria> findAll(){
     }
 
     public Categoria cadastrarCategoria(Categoria categoria) {
-
-           return categoriaRepository.save(categoria);
+  
+    		categoriaRepository.save(categoria);
+   
+           return categoria;
         }
 
 

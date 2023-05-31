@@ -1,5 +1,6 @@
 package br.com.api.g3.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -28,42 +29,43 @@ public class Pedido {
 	@JoinColumn(name="fk_cli_cd_id")
 	private Cliente cliente;
 
-
+	
 
 	public Pedido(Long pedidoId) {
 		this.pedidoId = pedidoId;
+		this.produtos = new ArrayList<Produto>();
 	}
 	
 	public Pedido() {
+		this.produtos = new ArrayList<Produto>();
 	}
 
 	public Long getPedidoId() {
 		return pedidoId;
 	}
 
-	public void setPedidoId(Long pedidoId) {
+	public void setPedidoId(Long pedidoId ) {
 		this.pedidoId = pedidoId;
 	}
 
-	public Object getProdutos() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Produto> getProdutos() {
+		return produtos;
 	}
 
-	public Object getCliente() {
-		// TODO Auto-generated method stub
-		return null;
+	public void setProdutos(List<Produto> produtos) {
+		this.produtos = produtos;
 	}
 
-	public void setProdutos(Object produtos2) {
-		// TODO Auto-generated method stub
-		
+	public Cliente getCliente() {
+		return cliente;
 	}
 
-	public void setCliente(Object cliente2) {
-		// TODO Auto-generated method stub
-		
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
+
+	
+	
 
     
 }
