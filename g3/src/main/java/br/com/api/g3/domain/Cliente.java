@@ -38,9 +38,16 @@ public class Cliente {
 	@Column(name = "cli_tx_nome")
 	private String nome;
 
+	//@NotBlank(message="O campo não pode estar vazio")
+	//@NotNull
+	//@CPF(message="Por favor, insira um CPF válido")
 	@Column(name = "cli_tx_cpf")
 	private String cpf;
 
+	//@NotBlank(message="O campo não pode estar vazio")
+	//@NotNull
+	//@Email
+	//@Pattern(regexp=".+@.+\\.com+", message="Por favor, insira um e-mail válido.")
 	@Column(name = "cli_tx_email")
 	private String email;
 

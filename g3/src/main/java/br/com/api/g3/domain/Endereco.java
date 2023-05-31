@@ -23,6 +23,8 @@ public class Endereco {
 	@Column(name="end_cd_id")
 	private Long enderecoId;
 	
+	//@NotBlank(message="O campo não pode estar vazio")
+	//@NotNull
 	@Column(name="end_tx_cep")
 	private String cep;
 	
@@ -38,6 +40,7 @@ public class Endereco {
 	@Column(name="end_tx_uf")
 	private String uf;
 	
+	//@Size(max=5)
 	@Column(name="end_tx_num")
 	private String numero;
 	

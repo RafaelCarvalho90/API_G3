@@ -42,8 +42,8 @@ public class ProdutoController {
 	
 	@GetMapping("/listar")
 	@SecurityRequirement(name="Bearer Auth")
-	@PreAuthorize("hasRole('ADMIN')")
-	@Operation( summary  = "Lista todos os Produtos - ADMIN", description = "Listagem de produtos")
+	@PreAuthorize("hasRole('USER')")
+	@Operation( summary  = "Lista todos os Produtos - USER", description = "Listagem de produtos")
 	@ApiResponses( value = {
 			@ApiResponse(responseCode= "200", description="Retorna todos os clientes"),
 			@ApiResponse(responseCode= "401", description="Erro de autenticacao")
@@ -54,8 +54,8 @@ public class ProdutoController {
 
 	@GetMapping("/{id}")
 	@SecurityRequirement(name="Bearer Auth")
-	@PreAuthorize("hasRole('ADMIN')")
-	@Operation( summary  = "Lista de Produtos por Id - ADMIN", description = "Lista produtos Id")
+	@PreAuthorize("hasRole('USER')")
+	@Operation( summary  = "Lista de Produtos por Id - USER", description = "Lista produtos Id")
 	public ResponseEntity<Produto> procurarId(@PathVariable Long id){
 		Optional <Produto> opt = produtoService.findById(id);
 		if(opt.isPresent()) {
