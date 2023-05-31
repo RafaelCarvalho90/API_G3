@@ -66,7 +66,6 @@ public class Cliente {
 	}
 
 	public Cliente(Long clienteId, String nome, String cpf, String email, boolean ativo, List<Endereco> endereco) {
-		super();
 		this.clienteId = clienteId;
 		this.nome = nome;
 		this.cpf = cpf;

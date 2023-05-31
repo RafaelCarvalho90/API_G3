@@ -14,10 +14,6 @@ public class ClienteDTO {
 	private String cep;
 
 	
-	
-	
-	
-	
 	public ClienteDTO() {
 		
 	}

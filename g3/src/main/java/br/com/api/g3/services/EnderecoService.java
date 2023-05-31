@@ -34,7 +34,7 @@ public class EnderecoService {
         Endereco enderecoNovo = enderecoRepository.findById(id).get();
         enderecoNovo.setCep(endereco.getCep());
         enderecoNovo.setLogradouro(endereco.getLogradouro());
-        enderecoNovo.setNumero(endereco.getLocalidade());
+        enderecoNovo.setNumero(endereco.getNumero());
         enderecoNovo.setBairro(endereco.getBairro());
         enderecoNovo.setLocalidade(endereco.getLocalidade());
         enderecoNovo.setUf(endereco.getUf());
@@ -56,7 +56,7 @@ public class EnderecoService {
 		endereco.setCep(Cep);
 		endereco.setLocalidade(endCadastro.getLocalidade());
 		endereco.setLogradouro(endCadastro.getLogradouro());
-		//endereco.setNumero(clienteDTO.getNumero());
+		//endereco.setNumero(endCadastro.getNumero());
 		endereco.setUf(endCadastro.getUf()); 
 		return endereco;	
 	}
