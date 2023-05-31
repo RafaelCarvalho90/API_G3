@@ -37,20 +37,7 @@ public class ClienteService {
 		cliente.setCpf(clienteDTO.getCpf());
 		cliente.setEmail(clienteDTO.getEmail());
 		cliente.setAtivo(clienteDTO.isAtivo());
-//			RestTemplate restTemplate = new RestTemplate();
-//			String uri= "http://viacep.com.br/ws/{cep}/json";
-//			Map<String, String> params = new HashMap<>();	
-//			params.put("cep", clienteDTO.getCep());
-//			Endereco endCadastro = restTemplate.getForObject(uri, Endereco.class, params);
-//			Endereco endereco = new Endereco();
-//			endereco.setBairro(endCadastro.getBairro());
-//			endereco.setCep(clienteDTO.getCep());
-//			endereco.setLocalidade(endCadastro.getLocalidade());
-//			endereco.setLogradouro(endCadastro.getLogradouro());
-//			endereco.setNumero(clienteDTO.getNumero());
-//			endereco.setUf(endCadastro.getUf());
-//			List<Endereco> enderecosCliente = new ArrayList<>();
-//	 		cliente.setEndereco(enderecosCliente);
+	
 		cliente.CadastrarEndereco(enderecoService.buscaCep(clienteDTO.getCep()));
 		enderecoService.adicionaEndereco(enderecoService.buscaCep(clienteDTO.getCep()));
 		clienteRepository.save(cliente);
@@ -80,4 +67,5 @@ public class ClienteService {
 
 		}
 	}
+	
 }

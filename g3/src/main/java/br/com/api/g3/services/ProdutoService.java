@@ -59,7 +59,7 @@ public class ProdutoService {
     		produto.setNome(produto.getNome());
     		produto.setDescricao(produto.getDescricao());
     		produto.setValor(produto.getValor());
-    		
+    		produto.setTipo(produto.getTipo());
            return produtoRepository.save(produto);
         }
 

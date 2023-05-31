@@ -2,8 +2,11 @@ package br.com.api.g3.domain;
 
 import java.util.List;
 
+import br.com.api.g3.enums.CategoriaEnum;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -31,15 +34,17 @@ public class Produto {
     @Column(name="prod_nm_valor")
     private Double valor;
     
-    
+    @Enumerated(EnumType.STRING)
+	@Column(name="cat_tx_tipo")
+	private CategoriaEnum tipo;
 
  
-    public Produto(Long produtoId, String nome, String descricao, Double valor) {
-		super();
+    public Produto(Long produtoId, String nome, String descricao, Double valor, CategoriaEnum tipo) {
 		this.produtoId = produtoId;
 		this.nome = nome;
 		this.descricao = descricao;
 		this.valor = valor;
+		this.tipo = tipo;
 		
 	}
     @OneToOne(mappedBy= "produto")
@@ -92,16 +97,20 @@ public class Produto {
 	public Produto() {
 		
 	}
-	
-//	public Produto(Long produtoId, String nome, String descricao, Double valor) {
-//		this.produtoId = produtoId;
-//		this.nome = nome;
-//		this.descricao = descricao;
-//		this.valor = valor;
-//		
-//	}
+
+	public CategoriaEnum getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(CategoriaEnum tipo) {
+		this.tipo = tipo;
+	}
 
 	
+	
+
+	
+		
 
 
     
