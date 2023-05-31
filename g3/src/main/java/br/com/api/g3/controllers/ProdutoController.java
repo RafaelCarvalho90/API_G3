@@ -14,8 +14,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.multipart.MultipartFile;
 
 import br.com.api.g3.domain.Produto;
 import br.com.api.g3.services.ProdutoService;
@@ -71,8 +72,8 @@ public class ProdutoController {
 	@SecurityRequirement(name="Bearer Auth")
 	@PreAuthorize("hasRole('ADMIN')")
 	@Operation( summary  = "Cadastrar novo Produto - ADMIN", description = "Cadastro de produtos")
-	public Object cadastrarProduto(@RequestParam String email, @RequestBody Produto produto) throws MessagingException {
-		return produtoService.cadastrarProduto(produto);
+	public Object cadastrarProduto(@RequestParam String email, @RequestPart Produto produto, @RequestPart MultipartFile foto) throws MessagingException {
+		return produtoService.cadastrarProduto(produto, foto);
 	}
 	
 

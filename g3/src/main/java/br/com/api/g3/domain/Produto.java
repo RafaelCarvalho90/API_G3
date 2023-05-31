@@ -29,9 +29,20 @@ public class Produto {
 
     @Column(name="prod_nm_valor")
     private Double valor;
+    
+    private String url;
 
  
-    @ManyToOne
+    public Produto(Long produtoId, String nome, String descricao, Double valor, String url) {
+		super();
+		this.produtoId = produtoId;
+		this.nome = nome;
+		this.descricao = descricao;
+		this.valor = valor;
+		this.url = url;
+	}
+
+	@ManyToOne
 	@JoinColumn(name="fk_ped_cd_id")
 	private Pedido pedidoRel;
 
@@ -79,12 +90,16 @@ public class Produto {
 		
 	}
 	
-	public Produto(Long produtoId, String nome, String descricao, Double valor) {
-		this.produtoId = produtoId;
-		this.nome = nome;
-		this.descricao = descricao;
-		this.valor = valor;
-		
+//	public Produto(Long produtoId, String nome, String descricao, Double valor) {
+//		this.produtoId = produtoId;
+//		this.nome = nome;
+//		this.descricao = descricao;
+//		this.valor = valor;
+//		
+//	}
+
+	public String getUrl() {
+		return url;
 	}
 
 	public void setUrl(String string) {

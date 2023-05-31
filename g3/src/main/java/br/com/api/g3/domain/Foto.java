@@ -23,7 +23,7 @@ public class Foto {
 	
 	
 	@OneToOne
-	@JoinColumn(name="prod_cd_id")
+	@JoinColumn(name="fk_prod_cd_id")
 	private Produto produto;
 	
 	public Long getId() {
