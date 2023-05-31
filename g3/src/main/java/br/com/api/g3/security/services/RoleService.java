@@ -11,6 +11,7 @@ public class RoleService {
 	@Autowired
 	RoleRepository roleRepository;
 	
+	// metodo usado para salvar a regra do usuario no banco de dados
 	public Role save(Role role) {
 		return roleRepository.save(role);
 	}

@@ -4,6 +4,8 @@ import java.util.Set;
 
 import jakarta.validation.constraints.*;
 
+// reponsavel para criar um novo usuario, aqui é definido as roles
+
 public class SignupRequestDTO {
 	@NotBlank
 	@Size(min = 3, max = 20)

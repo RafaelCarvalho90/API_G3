@@ -59,7 +59,7 @@ public class ProdutoService {
 
     }
 
-    public Produto cadastrarProduto(Produto produto) {
+    public Produto cadastrarProduto(Produto produto,MultipartFile foto) {
 
            return produtoRepository.save(produto);
         }

@@ -44,20 +44,15 @@ public class AuthController {
 	UserRepository userRepository;
 
 	@Autowired
-	RoleRepository roleRepository;
+	RoleRepository roleRepository;  
 
 	@Autowired
-	PasswordEncoder encoder;
+	PasswordEncoder encoder;  // responsavel por codificar a senha, usando um sha-1 ou maior
 
 	@Autowired
 	JwtUtils jwtUtils;
 	
-	
-	
-	
-
-
-
+	//faz o login de um usuario cadastrado préviamente no banco de dados
 	@PostMapping("/signin")
 	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequestDTO loginRequest) {
 
@@ -73,7 +68,7 @@ public class AuthController {
 		return ResponseEntity.ok(
 				new JwtResponseDTO(jwt, userDetails.getId(), userDetails.getUsername(), userDetails.getEmail(), roles));
 	}
-
+	//faz o cadastro de um novo usuario
 	@PostMapping("/signup")
 	public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequestDTO signUpRequest) {
 		if (userRepository.existsByUsername(signUpRequest.getUsername())) {

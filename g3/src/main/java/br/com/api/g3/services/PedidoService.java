@@ -4,10 +4,12 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import br.com.api.g3.domain.Pedido;
 import br.com.api.g3.repositories.PedidoRepository;
 
+@Service
 public class PedidoService {
     @Autowired
 	PedidoRepository pedidoRepository;
