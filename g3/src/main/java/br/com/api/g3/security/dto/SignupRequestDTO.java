@@ -7,16 +7,16 @@ import jakarta.validation.constraints.*;
 // reponsavel para criar um novo usuario, aqui é definido as roles
 
 public class SignupRequestDTO {
-	@NotBlank
-	@Size(min = 3, max = 20)
+	@NotBlank // não pode ficar em branco
+	@Size(min = 3, max = 20) //define o tamanho da strign
 	private String username;
 
 	@NotBlank
 	@Size(max = 50)
-	@Email
+	@Email // anotação para validação de email
 	private String email;
 
-	private Set<String> role;
+	private Set<String> role; 
 
 	@NotBlank
 	@Size(min = 6, max = 40)
