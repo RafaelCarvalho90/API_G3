@@ -32,13 +32,14 @@ import br.com.api.g3.security.repositories.RoleRepository;
 import br.com.api.g3.security.repositories.UserRepository;
 import br.com.api.g3.security.services.UserDetailsImpl;
 
-
+//permite solicitações de recursos de origens diferentes, mecanimos de segurancaça que impoe restrições 
+//permite que voce controle quais origens podem acessar o end point 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
-	@Autowired
-	AuthenticationManager authenticationManager;
+	@Autowired  // pedir para dar ctrl click
+	AuthenticationManager authenticationManager;  //pertence ao spring docs e é interface que gerencia a autenticação de usuarios
 
 	@Autowired
 	UserRepository userRepository;
@@ -46,19 +47,19 @@ public class AuthController {
 	@Autowired
 	RoleRepository roleRepository;  
 
-	@Autowired
-	PasswordEncoder encoder;  // responsavel por codificar a senha, usando um sha-1 ou maior
+	@Autowired   //que tbm é uma interface
+	PasswordEncoder encoder;  // responsavel por criptografar a senha, e comparar com uma senha armazenada usando o a sha-1 (algoritimo de dispersão seguro/secure hash) ou maior
 
 	@Autowired
-	JwtUtils jwtUtils;
+	JwtUtils jwtUtils;  // usado para gerar o token
 	
 	//faz o login de um usuario cadastrado préviamente no banco de dados
 	@PostMapping("/signin")
 	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequestDTO loginRequest) {
-
+		//faz a autencicação
 		Authentication authentication = authenticationManager.authenticate(
 				new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
-
+		//fornece acesso ao contexto de segurança atual,permite recuperar informações
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		String jwt = jwtUtils.generateJwtToken(authentication);
 		
